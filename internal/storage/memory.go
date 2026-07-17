@@ -3,6 +3,7 @@ package storage
 import (
 	"errors"
 	"sync"
+	"time"
 
 	"tasks-api/internal/models"
 )
@@ -46,6 +47,9 @@ func (s *MemoryStorage) Create(t models.Task) (models.Task, error) {
 
 	t.ID = s.nextID
 	s.nextID++
+
+	// хранилище само ставит CreatedAt в UTC
+	t.CreatedAt = time.Now().UTC()
 
 	s.tasks[t.ID] = t
 	return t, nil

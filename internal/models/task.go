@@ -9,11 +9,10 @@ type Task struct {
 	CreatedAt time.Time `json:"created_at,omitempty"`
 }
 
-func NewTask(id int, title string) Task {
+func NewTask(id int, title string, done bool) Task {
 	return Task{
-		ID:        id,
-		Title:     title,
-		Done:      false,
-		CreatedAt: time.Now().UTC(), // просто время, без Format
+		ID:    id,
+		Title: title,
+		Done:  done,
 	}
 }

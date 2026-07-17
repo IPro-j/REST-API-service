@@ -5,6 +5,12 @@ import (
 )
 
 func (h *Handler) Health(w http.ResponseWriter, r *http.Request) {
-	//writeJSON из tasks.go
+
+	if r.Method != http.MethodGet {
+		w.Header().Set("Allow", "GET")
+		writeError(w, http.StatusMethodNotAllowed, "method not allowed")
+		return
+	}
+
 	writeJSON(w, http.StatusOK, map[string]string{"status": "ok"})
 }
